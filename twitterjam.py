@@ -26,22 +26,25 @@ def make_api():
                       wait_on_rate_limit_notify=True)
 
 
-def advertisers(pth):
+def get_advertisers(pth):
     output = (check_output(['ps2ascii', pth])
               .strip().decode())
     return [o.strip() for o in output.split('@')]
 
 
+def block(account):
+    try:
+        logging.info('Blocking ' + account)
+        api.create_block(account)
+    except tweepy.error.TweepError:
+        logging.exception(account)
+
+
 if __name__ == '__main__':
-    logging.basicConfig(filename='log.log',
+    logging.basicConfig(filename='twitterjam.log',
                         format='%(levelname)s:%(asctime)s: %(message)s')
     logging.getLogger().setLevel(logging.INFO)
     logging.getLogger('tweepy').setLevel(logging.WARNING)
-
     api = make_api()
-    for ad in advertisers(sys.argv[1]):
-        try:
-            logging.info('Blocking ' + ad)
-            api.create_block(ad)
-        except tweepy.error.TweepError:
-            logging.exception(ad)
+    for advertiser in get_advertisers(sys.argv[1]):
+        block(advertiser)

@@ -1,14 +1,15 @@
 # twitterjam
 
-Block your twitter advertiser list
+A futile act of civil disobedience: block all Twitter advertisers that have
+expressed an interest in you.
 
 ## Usage
 
  1. Clone this repo
  2. Install the dependencies
     - The command line utility `ps2ascii` (found in the `ghostscript` package
-      on Linux/macOS)
-    - The python package `tweepy`
+      on Linux/macOS, e.g. `brew install ghostscript`)
+    - The python package `tweepy` (e.g. `pip install --user tweepy`)
  3. Create a Twitter application and add your keys to `twitterjam.py`
     - Go to [Twitter apps](https://apps.twitter.com/)
     - Click [create new app](https://apps.twitter.com/app/new) and fill in the
@@ -21,6 +22,9 @@ Block your twitter advertiser list
     Advertiser List** on [Your Twitter
     Data](https://twitter.com/settings/your_twitter_data). They will email you a file `twitter_advertiser_list.pdf`.
  5. Finally run this command
+
     ```bash
     $ python twitterjam /path/to/twitter_advertiser_list.pdf
     ```
+
+    Progress is logged to `twitterjam.log`.

@@ -29,7 +29,8 @@ def make_api():
 def get_advertisers(pth):
     output = (check_output(['ps2ascii', pth])
               .strip().decode())
-    return [o.strip() for o in output.split('@')]
+    return [o.strip() for o in output.split('@')
+            if len(o.split()) == 1]  # if exactly one word on line
 
 
 def block(account):
